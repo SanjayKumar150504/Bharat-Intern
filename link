@@ -1,0 +1,34 @@
+# Importing necessary libraries
+import pandas as pd
+from google.colab import drive
+
+
+# Mount Google Drive to access files
+drive.mount('/content/drive')
+
+
+# Load the dataset using the file ID
+file_id = '1PP0CyOtD5JD7eNXUSfQ_T-fagfCABnXB'
+file_url = f'https://drive.google.com/uc?id={file_id}'
+movies_data = pd.read_csv(file_url)
+
+
+# Function to recommend movies in a given genre
+def recommend_movies(genre, n=10):
+    # Filter movies by genre
+    genre_movies = movies_data[movies_data['genres'].str.contains(genre, case=False)]
+
+
+    # Display recommended movies
+    print(f"Recommended {genre} movies:")
+    for title, genres in zip(genre_movies['title'].head(n), genre_movies['genres'].head(n)):
+        print(f"{title} - {genres}")
+
+
+# Example usage:
+input_genre = 'Romance'
+recommend_movies(input_genre)
+
+
+ Movie Recommendation system working link
+
