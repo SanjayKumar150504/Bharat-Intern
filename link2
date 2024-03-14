@@ -1,0 +1,38 @@
+# Mount Google Drive to access files
+from google.colab import drive
+drive.mount('/content/drive')
+
+
+# Importing necessary libraries
+import numpy as np
+import pandas as pd
+
+
+# Load dataset from Google Drive
+file_id = '1QXilnZKun5SjuYUuemsaLfXVRL6uD1Mw'
+file_path = f'/content/drive/My Drive/{file_id}'
+df = pd.read_csv(f'https://drive.google.com/uc?id={file_id}')
+
+
+# Check the unique values in 'furnishingstatus' column
+print("Unique values in 'furnishingstatus' column:", df['furnishingstatus'].unique())
+
+
+# Filter the dataset based on input criteria
+input_bedrooms = 4
+input_furnishing_status = 'furnished'  # Assuming 'yes' corresponds to 'furnished'
+
+
+filtered_df = df[(df['bedrooms'] == input_bedrooms) & (df['furnishingstatus'] == input_furnishing_status)]
+
+
+# Print the individual price value
+if not filtered_df.empty:
+    print("Price value based on input:")
+    print(filtered_df['price'].iloc[0])
+else:
+    print("No matching records found in the dataset.")
+
+
+Working
+
